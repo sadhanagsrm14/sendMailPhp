@@ -18,7 +18,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
     $mail->Username   = 'rkumargupta798@gmail.com';                     // SMTP username
-    $mail->Password   = '*******';                               // SMTP password
+    $mail->Password   = 'Gupta@1234#';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
     $mail->Port       = 587;                                    // TCP port to connect to
 
@@ -35,9 +35,18 @@ try {
     //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
     // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->isHTML(true);  
+    $base_url = 'http://localhost/projects/phpprojects/sendMailPhp/'; //
+
+$message = '';
+
+                                    // Set email format to HTML
     $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $track_code = md5(rand());
+    $message_body = 'This is the HTML message body <b>in bold!</b>';
+
+    $message_body .= '<img src="'.$base_url.'email_track.php?code='.$track_code.'" width="1" height="1" />';
+    $mail->Body    = $message_body;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
